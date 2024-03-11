@@ -58,3 +58,12 @@ public class AdjacencyList {
     }
 
 }
+//output
+// Vertex 0:  1 3
+// Vertex 1:  0 2
+// Vertex 2:  1 3
+// Vertex 3:  2 0
+// 0
+// 1
+// 3
+// 2
