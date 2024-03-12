@@ -1,5 +1,6 @@
 import java.util.LinkedList;
-
+import java.util.Queue;
+import java.util.Stack;
 class Graph{
     LinkedList<Integer> [] adj;
 
@@ -11,6 +12,43 @@ class Graph{
 
         }     
     }
+    
+    public void BFS(int s, int vertex) {
+        boolean[] visited = new boolean[vertex];
+        Queue<Integer> q = new LinkedList<>();
+        visited[s] = true;
+        q.offer(s);
+        while (!q.isEmpty()) {
+            int u = q.poll();
+            System.out.println(u + "");
+            for (int v : adj[u]) {
+                if (!visited[v]) {
+                    visited[v] = true;
+                    q.offer(v);
+                }
+            }
+        }
+    }
+
+    public void Dfs(int s, int vertex) {
+        boolean[] visited = new boolean[vertex];
+        Stack<Integer> Stack = new Stack<>();
+        Stack.push(s);
+        while (!Stack.isEmpty()) {
+            int u = Stack.pop();
+            if (!visited[u]) {
+                visited[u] = true;
+                System.out.println(u + " ");
+                for (int v : adj[u]) {
+                    if (!visited[v]) {
+                        Stack.push(v);
+                    }
+                }
+            }
+        }
+
+    }
+
 
     public void addEdge(int u, int v){   
         adj[u].add(v);       
@@ -36,6 +74,9 @@ public class AdjacencyList {
         g.addEdge(3, 0);
 
         g.display();
+        g.BFS(0, 4);
+        System.out.println("");
+        g.Dfs(0, 4);
     }
 
 }
