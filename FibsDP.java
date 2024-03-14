@@ -14,7 +14,8 @@ public class FibsDP {
     }    
     
     public static void main(String[] args) {
-        int result = fib(null, 5);
+        int memo[] = new int[6];
+        int result = fib(memo, 5);
         System.out.println(result);
 
     }
