@@ -1,5 +1,5 @@
-import java.util.Stack;
 import java.util.LinkedList;
+import java.util.Queue;
 
 class Graph {
     LinkedList<Integer>[] adj;
@@ -13,23 +13,21 @@ class Graph {
         }
     }
 
-    public void Dfs(int s, int vertex) {
+    public void BFS(int s, int vertex) {
         boolean[] visited = new boolean[vertex];
-        Stack<Integer> Stack = new Stack<>();
-        Stack.push(s);
-        while (!Stack.isEmpty()) {
-            int u = Stack.pop();
-            if (!visited[u]) {
-                visited[u] = true;
-                System.out.println(u + " ");
-                for (int v : adj[u]) {
-                    if (!visited[v]) {
-                        Stack.push(v);
-                    }
+        Queue<Integer> q = new LinkedList<>();
+        visited[s] = true;
+        q.offer(s);
+        while (!q.isEmpty()) {
+            int u = q.poll();
+            System.out.println(u + "");
+            for (int v : adj[u]) {
+                if (!visited[v]) {
+                    visited[v] = true;
+                    q.offer(v);
                 }
             }
         }
-
     }
 
     public void addEdge(int u, int v) {
@@ -48,7 +46,7 @@ class Graph {
     }
 }
 
-public class Dfs {
+public class Bfs {
     public static void main(String[] args) {
         Graph g = new Graph(4);
         g.addEdge(0, 1);
@@ -57,23 +55,7 @@ public class Dfs {
         g.addEdge(3, 0);
 
         g.display();
-        System.out.println("");
-        g.Dfs(0, 4);
+        g.Bfs(0, 4);
     }
 
 }
-// output
-
-// [Running] cd "c:\Users\padma\OneDrive\Desktop\Git\Java_Program_Learnings\" &&
-// javac Dfs.java && java Dfs
-// Vertex 0: 1 3
-// Vertex 1: 0 2
-// Vertex 2: 1 3
-// Vertex 3: 2 0
-
-// 0
-// 3
-// 2
-// 1
-
-// [Done] exited with code=0 in 2.055 seconds

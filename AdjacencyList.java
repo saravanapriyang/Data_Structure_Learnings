@@ -49,6 +49,29 @@ class Graph{
 
     }
 
+    public void dfsearch(int V) {
+        boolean[] visited = new boolean[V];
+        int[] compID = new int[V];
+        int count = 0;
+        for (int v = 0; v < V; v++) {
+            if (!visited[v]) {
+                dfsearch(v, visited, compID, count);
+                count++;
+            }
+        }
+        System.out.println(count);
+    }
+
+    void dfsearch(int v, boolean[] visited, int[] compID, int count) {
+        visited[v] = true;
+        compID[v] = count;
+        for (int w : adj[v]) {
+            if (!visited[v]) {
+                dfsearch(w, visited, compID, count);
+            }
+        }
+    }
+
 
     public void addEdge(int u, int v){   
         adj[u].add(v);       
@@ -67,16 +90,18 @@ class Graph{
 
 public class AdjacencyList {
     public static void main(String[] args) {
-        Graph g = new Graph(4);
-        g.addEdge(0, 1);
-        g.addEdge(1, 2);
-        g.addEdge(2, 3);
-        g.addEdge(3, 0);
+        Graph graph = new Graph(6);
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+        graph.addEdge(3, 4);
 
-        g.display();
-        g.BFS(0, 4);
-        System.out.println("");
-        g.Dfs(0, 4);
+        graph.dfsearch(6);
     }
 
 }
+//output
+
+// Vertex 0:  1 3
+// Vertex 1:  0 2
+// Vertex 2:  1 3
+// Vertex 3:  2 0
